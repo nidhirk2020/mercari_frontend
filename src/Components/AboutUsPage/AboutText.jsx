@@ -14,10 +14,10 @@ const AboutText = () => {
         <h2 className="text-3xl lg:text-4xl font-bold mb-4">
           Awakening <span className="text-[#2F8479]">Inner Peace</span> to Transform Lives Worldwide
         </h2>
-        <p className="text-lg mb-4 text-gray-600">
+        <p className="text-lg mb-4 text-gray-800">
           At Shambhala Spiritual Foundation, we believe in the profound potential of every soul to achieve enlightenment and inner peace through meditation and mindful living. Our mission is to guide individuals on a spiritual journey of self-discovery, fostering a sense of unity, compassion, and purpose. Join us in creating a compassionate, enlightened society where everyone can realize their highest potential.
         </p>
-        <p className="text-lg text-gray-600">
+        <p className="text-lg text-gray-800">
           At Shambhala Spiritual Foundation, we believe in the profound potential of every soul to achieve enlightenment and inner peace through meditation and mindful living. Our mission is to guide individuals on a spiritual journey of self-discovery, fostering a sense of unity, compassion, and purpose. Join us in creating a compassionate, enlightened society where everyone can realize their highest potential.
         </p>
       </div>
