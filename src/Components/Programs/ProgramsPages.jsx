@@ -4,7 +4,7 @@ import programimage from '../../assets/programsimages/programimage.png'; // Impo
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid'; // Import Heroicons v2
 
 const Programs = () => {
-  const [eventType, setEventType] = useState('All Events');
+  const [eventType, setEventType] = useState('Select Event Type');
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const events = Array(9).fill({
@@ -20,12 +20,12 @@ const Programs = () => {
   };
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="w-full max-w-screen-xl mx-auto px-4 py-16">
       {/* Dropdown */}
-      <div className="relative inline-block text-left mb-6">
+      <div className="relative inline-block text-left mb-6 w-full md:w-auto"> {/* Fixed the width */}
         <motion.button
           whileTap={{ scale: 0.95 }}
-          className="bg-white border border-gray-300 text-black py-2 px-4 rounded-md shadow-md flex justify-between items-center"
+          className="bg-white border border-gray-300 text-black py-2 px-4 rounded-md shadow-md flex justify-between items-center w-full md:w-auto"
           onClick={() => setDropdownOpen(!dropdownOpen)}
         >
           {eventType}
@@ -54,14 +54,14 @@ const Programs = () => {
       </div>
 
       {/* Program Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20 px-6 sm:px-8 lg:px-44">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
         {events.map((event, index) => (
           <motion.div
             key={index}
-            className="border border-gray-200 rounded-lg shadow-lg overflow-hidden"
+            className="border border-gray-200 rounded-lg shadow-lg overflow-hidden mx-auto" // Added mx-auto to center cards in 480px frame
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 100 }}
-            style={{ width: '360px', height: '430px' }}
+            style={{ maxWidth: '360px' }}  // Ensures that the card width doesn't exceed 360px
           >
             <img src={programimage} alt="Program" className="w-full h-48 object-cover" />
             <div className="p-4">

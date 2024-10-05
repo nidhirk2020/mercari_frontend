@@ -19,8 +19,8 @@ const Navbar = () => {
           <img src={logo} alt="Shambhala Logo" className="w-16 h-16" />
         </div>
 
-        {/* Center - Nav Items for large screens */}
-        <ul className="hidden md:flex space-x-8 text-lg font-semibold">
+        {/* Center - Nav Items for large and medium screens */}
+        <ul className="hidden md:flex space-x-6 lg:space-x-8 text-base lg:text-lg font-semibold">
           <li>
             <Link to="/" className="text-gray-800 hover:text-green-600 transition-colors duration-300">
               HOME
@@ -38,16 +38,21 @@ const Navbar = () => {
           </li>
           <li>
             <Link to="/contact" className="text-gray-800 hover:text-green-600 transition-colors duration-300">
+              RESOURCES
+            </Link>
+          </li>
+          <li>
+            <Link to="/contact" className="text-gray-800 hover:text-green-600 transition-colors duration-300">
               CONTACT
             </Link>
           </li>
         </ul>
 
-        {/* Right side - Button for large screens */}
+        {/* Right side - Button for large and medium screens */}
         <div className="hidden md:block">
           <Link
             to="/donate"
-            className="bg-[#164453] text-white py-2 px-4 rounded hover:bg-green-700 transition-colors duration-300"
+            className="bg-[#164453] text-white py-2 px-3 lg:px-4 rounded hover:bg-green-700 transition-colors duration-300"
           >
             DONATE HERE
           </Link>
@@ -98,6 +103,15 @@ const Navbar = () => {
               onClick={toggleMenu}
             >
               PROGRAMS
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/contact"
+              className="text-gray-800 hover:text-green-600 transition-colors duration-300"
+              onClick={toggleMenu}
+            >
+              RESOURCES
             </Link>
           </li>
           <li>
