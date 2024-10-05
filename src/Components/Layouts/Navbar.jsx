@@ -12,7 +12,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-md w-full fixed top-0 left-0 z-50">
+    <nav className=" bg-white shadow-md w-full sticky top-0 left-0 z-50">
       <div className="w-full max-w-screen-xl mx-auto flex justify-between items-center py-4 px-4 lg:px-6">
         {/* Left side - Logo */}
         <div className="flex items-center">
