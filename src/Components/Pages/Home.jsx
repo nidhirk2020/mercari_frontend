@@ -1,9 +1,10 @@
 import React from 'react';
 import CarouselComponent from '../Home/crousel';
+import ShambhalaComponent from '../Home/ShambhalaComponent';
 import ImageTextComponent from '../Home/ImageTextComponent';
 import Slider from '../Home/slider';
-import Resource from '../Home/resource';
-import ShambhalaComponent from '../Home/ShambhalaComponent';
+// import Resource from '../Home/resource';
+
 const Home = () => {
   return (
     <div>
@@ -12,7 +13,7 @@ const Home = () => {
       <ShambhalaComponent/>
       <ImageTextComponent/>
       <Slider/>
-      <Resource/>
+      {/* <Resource/> */}
     </div>
   );
 };
