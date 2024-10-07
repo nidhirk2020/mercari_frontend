@@ -20,13 +20,13 @@ const ImageTextComponent = () => {
         <img 
           src={mount}
           alt="Small 1" 
-          className="w-32 h-36 object-cover mb-2 md:mb-1 mr-2 md:mr-0" // Increased margin for mobile
+          className="w-40 md:w-32 h-36 object-cover mb-2 md:mb-1 mr-2 md:mr-0" // Increased margin for mobile
 
         />
         <img 
           src={mount}
           alt="Small 2" 
-          className="w-32 h-36 object-cover" 
+          className="w-40 md:w-32 h-36 object-cover mb-2 md:mb-1" 
         />
       </div>
 

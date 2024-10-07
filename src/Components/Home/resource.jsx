@@ -2,11 +2,14 @@ import React from 'react';
 import resource1 from '../../assets/resources.jpeg';
 import resource2 from '../../assets/resource2.jpeg';
 import resource3 from '../../assets/resource3.jpeg';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const Resource = () => {
-    const handleNext = () => {
-        // Implement your navigation logic here
-        console.log("Next clicked");
+    const navigate = useNavigate(); // Initialize useNavigate
+
+  const handleNext = () => {
+    navigate('/blog'); // Navigate to the Blogs page
+        
     };
 
     return (
@@ -18,7 +21,7 @@ const Resource = () => {
                 <div className="relative group w-full md:w-[400px]"> {/* Adjust width for larger images */}
                     <img
                         src={resource1}
-                        alt="Blogs"
+                        alt="/blog"
                         className="w-full h-44 object-cover transition-transform duration-300 transform group-hover:scale-105 opacity-50" // Adjust to full width
                     />
                     <div className="absolute text-xl top-2 left-2 text-accent font-semibold">Blogs</div>
