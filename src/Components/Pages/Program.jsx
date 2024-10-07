@@ -4,7 +4,7 @@ import Programs from "../Programs/ProgramsPages";
 
 const Program = () => {
   return (
-    <div className="pt-24">
+    <div>
       <Banner title="PROGRAM"/>
       <Programs/>
     </div>
