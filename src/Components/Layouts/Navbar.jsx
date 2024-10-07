@@ -1,26 +1,34 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion'; // Import Framer Motion
-import { HiOutlineMenuAlt4, HiOutlineX } from 'react-icons/hi'; // Hamburger and Close icons
-import logo from '../../assets/logo.png'; // Ensure the path to your logo is correct
+import { motion, AnimatePresence } from 'framer-motion'; // Framer Motion
+import { HiOutlineMenuAlt4, HiOutlineX } from 'react-icons/hi'; // Icons
+import { IoMdArrowDropdown } from 'react-icons/io'; // Dropdown arrow icon
+import logo from '../../assets/logo.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Dropdown state
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen); // Toggle dropdown
+  };
+
   return (
-    <nav className="bg-white shadow-md w-full fixed top-0 left-0 z-50">
+    <nav
+      className="bg-white bg-opacity-20 backdrop-blur-lg shadow-md w-full sticky top-0 left-0 z-50"
+    >
       <div className="w-full max-w-screen-xl mx-auto flex justify-between items-center py-4 px-4 lg:px-6">
         {/* Left side - Logo */}
         <div className="flex items-center">
-          <img src={logo} alt="Shambhala Logo" className="w-16 h-16" />
+          <img src={logo} alt="Shambhala Logo" className="w-20 h-20" />
         </div>
 
         {/* Center - Nav Items for large and medium screens */}
-        <ul className="hidden md:flex space-x-6 lg:space-x-8 text-base lg:text-lg font-semibold">
+        <ul className="hidden md:flex space-x-6 lg:space-x-8 text-base lg:text-[16px] font-semibold">
           <li>
             <Link to="/" className="text-gray-800 hover:text-green-600 transition-colors duration-300">
               HOME
@@ -36,10 +44,54 @@ const Navbar = () => {
               PROGRAMS
             </Link>
           </li>
-          <li>
-            <Link to="/contact" className="text-gray-800 hover:text-green-600 transition-colors duration-300">
+          {/* Dropdown for Resources */}
+          <li className="relative">
+            <div
+              className="cursor-pointer flex items-center text-gray-800 hover:text-green-600 transition-colors duration-300"
+              onClick={toggleDropdown}
+            >
               RESOURCES
-            </Link>
+              <IoMdArrowDropdown className={`ml-1 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+            </div>
+            <AnimatePresence>
+              {isDropdownOpen && (
+                <motion.ul
+                  className="absolute left-0 mt-2 w-40 bg-white bg-opacity-90 backdrop-blur-lg rounded shadow-lg"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <li>
+                    <Link
+                      to="/blogs"
+                      className="block px-4 py-2 text-gray-800 hover:bg-green-200"
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
+                      Blogs
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/media"
+                      className="block px-4 py-2 text-gray-800 hover:bg-green-200"
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
+                      Media
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/guides"
+                      className="block px-4 py-2 text-gray-800 hover:bg-green-200"
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
+                      Guides
+                    </Link>
+                  </li>
+                </motion.ul>
+              )}
+            </AnimatePresence>
           </li>
           <li>
             <Link to="/contact" className="text-gray-800 hover:text-green-600 transition-colors duration-300">
