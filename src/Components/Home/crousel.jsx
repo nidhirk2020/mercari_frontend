@@ -3,10 +3,11 @@ import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Banner from './Banner'; // Import the Banner component
+import bg from '../../assets/bg.png';
 
 const CarouselComponent = () => {
   return (
-    <div className="relative w-full h-[550px] md:h-[767px] bg-[#164453] overflow-hidden">
+    <div className="relative w-full h-[550px] md:h-[767px] overflow-hidden">
       <Carousel
         autoPlay
         interval={3000}
