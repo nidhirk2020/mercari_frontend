@@ -8,8 +8,9 @@ const storage = getStorage();
 
 const CreateBlogs = () => {
   const [title, setTitle] = useState('');
-  const [paragraphs, setParagraphs] = useState(['']);
-  const [images, setImages] = useState([]);
+  const [paragraphBlocks, setParagraphBlocks] = useState([
+    { subHeading: '', paragraph: '', bulletPoints: [''], image: null },
+  ]);
   const [author, setAuthor] = useState('');
   const user = auth.currentUser;
 
@@ -36,73 +37,139 @@ const CreateBlogs = () => {
     return uploadedImageUrls;
   };
 
-  const createBlog = async () => {
-    if (title.trim() === '' || paragraphs.some(paragraph => paragraph.trim() === '')) return;
+  const handleBlockImageUpload = async (file, blockIndex) => {
+    if (file) {
+      const imageRef = ref(storage, `blogs/${file.name}`);
+      await uploadBytes(imageRef, file);
+      const downloadURL = await getDownloadURL(imageRef);
 
-    const imageUrls = await handleImageUpload(images);
+      // Update the image URL in the specific block
+      const updatedBlocks = [...paragraphBlocks];
+      updatedBlocks[blockIndex].image = downloadURL;
+      setParagraphBlocks(updatedBlocks);
+    }
+  };
+
+  const createBlog = async () => {
+    if (title.trim() === '' || paragraphBlocks.every(block => block.paragraph.trim() === '')) return;
+
+    // Flatten the block data for storage
+    const blockData = paragraphBlocks.map(block => ({
+      subHeading: block.subHeading,
+      paragraph: block.paragraph,
+      bulletPoints: block.bulletPoints.filter(bullet => bullet.trim() !== ''),
+      image: block.image,
+    }));
+
     await addDoc(collection(db, 'blogs'), {
       title,
-      content: paragraphs,
-      images: imageUrls,
+      contentBlocks: blockData,
       author,
       createdBy: user.uid,
       timestamp: new Date(),
     });
 
+    // Reset the form
     setTitle('');
-    setParagraphs(['']);
-    setImages([]);
+    setParagraphBlocks([{ subHeading: '', paragraph: '', bulletPoints: [''], image: null }]);
   };
 
-  const addParagraph = () => setParagraphs([...paragraphs, '']);
-  const removeParagraph = (index) => setParagraphs(paragraphs.filter((_, i) => i !== index));
-  const updateParagraph = (index, value) => {
-    const newParagraphs = [...paragraphs];
-    newParagraphs[index] = value;
-    setParagraphs(newParagraphs);
+  const addParagraphBlock = () => {
+    setParagraphBlocks([...paragraphBlocks, { subHeading: '', paragraph: '', bulletPoints: [''], image: null }]);
+  };
+
+  const removeParagraphBlock = (index) => {
+    setParagraphBlocks(paragraphBlocks.filter((_, i) => i !== index));
+  };
+
+  const updateParagraphBlock = (index, key, value) => {
+    const updatedBlocks = [...paragraphBlocks];
+    updatedBlocks[index][key] = value;
+    setParagraphBlocks(updatedBlocks);
+  };
+
+  const addBulletPoint = (blockIndex) => {
+    const updatedBlocks = [...paragraphBlocks];
+    updatedBlocks[blockIndex].bulletPoints.push('');
+    setParagraphBlocks(updatedBlocks);
+  };
+
+  const updateBulletPoint = (blockIndex, bulletIndex, value) => {
+    const updatedBlocks = [...paragraphBlocks];
+    updatedBlocks[blockIndex].bulletPoints[bulletIndex] = value;
+    setParagraphBlocks(updatedBlocks);
   };
 
   return (
     <div className="p-8 max-w-2xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">Create New Blog Post</h1>
-      <div className="mb-4">
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Blog Title"
-          className="w-full border p-2 mb-2"
-        />
-        {paragraphs.map((paragraph, index) => (
-          <div key={index} className="flex items-start mb-2">
-            <textarea
-              value={paragraph}
-              onChange={(e) => updateParagraph(index, e.target.value)}
-              placeholder={`Paragraph ${index + 1}`}
-              className="w-full border p-2"
+      <input
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Blog Title"
+        className="w-full border p-2 mb-4"
+      />
+
+      {paragraphBlocks.map((block, index) => (
+        <div key={index} className="mb-6 border p-4 rounded">
+          <input
+            value={block.subHeading}
+            onChange={(e) => updateParagraphBlock(index, 'subHeading', e.target.value)}
+            placeholder="Sub Heading"
+            className="w-full border p-2 mb-4"
+          />
+          <textarea
+            value={block.paragraph}
+            onChange={(e) => updateParagraphBlock(index, 'paragraph', e.target.value)}
+            placeholder={`Paragraph ${index + 1}`}
+            className="w-full border p-2 mb-4"
+          />
+          
+          {block.bulletPoints.map((bullet, bulletIndex) => (
+            <div key={bulletIndex} className="flex items-center mb-2">
+              <input
+                value={bullet}
+                onChange={(e) => updateBulletPoint(index, bulletIndex, e.target.value)}
+                placeholder={`Bullet Point ${bulletIndex + 1}`}
+                className="w-full border p-2"
+              />
+              {bulletIndex === block.bulletPoints.length - 1 && (
+                <button
+                  onClick={() => addBulletPoint(index)}
+                  className="bg-gray-300 px-2 py-1 rounded ml-2"
+                >
+                  Add Bullet
+                </button>
+              )}
+            </div>
+          ))}
+
+          <div className="mt-4">
+            <label className="block mb-2">Upload Image:</label>
+            <input
+              type="file"
+              onChange={(e) => handleBlockImageUpload(e.target.files[0], index)}
+              className="mb-4"
             />
-            {paragraphs.length > 1 && (
-              <button
-                onClick={() => removeParagraph(index)}
-                className="bg-red-500 text-white px-2 py-1 ml-2 rounded"
-              >
-                Remove
-              </button>
-            )}
           </div>
-        ))}
-        <button onClick={addParagraph} className="bg-gray-300 px-2 py-1 mb-2 rounded">
-          Add Paragraph
-        </button>
-        <input
-          type="file"
-          multiple
-          onChange={(e) => setImages(Array.from(e.target.files))}
-          className="mb-4"
-        />
-        <button onClick={createBlog} className="bg-blue-500 text-white px-4 py-2 rounded">
-          Create Blog
-        </button>
-      </div>
+
+          {paragraphBlocks.length > 1 && (
+            <button
+              onClick={() => removeParagraphBlock(index)}
+              className="bg-red-500 text-white px-2 py-1 mt-4 rounded"
+            >
+              Remove Block
+            </button>
+          )}
+        </div>
+      ))}
+
+      <button onClick={addParagraphBlock} className="bg-gray-300 px-4 py-2 mb-4 rounded">
+        Add Paragraph Block
+      </button>
+      <button onClick={createBlog} className="bg-blue-500 text-white px-4 py-2 rounded">
+        Create Blog
+      </button>
     </div>
   );
 };
