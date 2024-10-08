@@ -13,7 +13,7 @@
     height: 600px;
     position: relative;
     text-align: center;
-    margin-bottom: 100px;
+    margin-bottom: 200px;
 }
 
 .second-heading {
@@ -189,10 +189,10 @@
     @media (max-width: 479px) {
         .shambhala-container {
             width: 100%;
-            overflow-x: hidden; /* Prevent horizontal overflow */
+            overflow: hidden; /* Prevent both horizontal and vertical overflow */
             padding: 10px 0;
             margin: 0 auto;
-            height: 800px; /* Set to viewport height for better visibility */
+            height: auto; /* Set to auto to avoid forcing a fixed height */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -201,9 +201,9 @@
     
         .shambhala-inner {
             max-width: 90%;
-            height: auto;
+            height: auto; /* Set to auto to adapt to content */
             margin-top: 50px;
-            margin-bottom: 100px; /* Add bottom margin for spacing */
+            margin-bottom: 50px; /* Adjust bottom margin as needed */
         }
     
         .shambhala-content {
@@ -211,6 +211,7 @@
             margin: 0 auto;
             text-align: center;
             padding: 0 10px;
+            margin-bottom: 100px; /* Adjust as needed to avoid extra space */
         }
     
         .shambhala-content h4 {
@@ -231,29 +232,29 @@
     
         /* Adjust box sizes and positions to fit content */
         .box1 {
-            width: 80px;
-            left: -40px; /* Adjust left position to avoid side overflow */
-            top: 25%;
+            width: 120px;
+            left: -40px;
+            top: 15%; /* Adjust position to avoid overflow */
             transform: translateY(-50%);
             position: absolute;
         }
     
         .box2 {
-            width: 80px;
-            right: 10px; /* Adjust right position to avoid side overflow */
-            top: 10px;
+            width: 120px;
+            right: -40px;
+            top: -30px; /* Adjust position to avoid overflow */
             position: absolute;
         }
     
         .box3 {
-            width: 80px;
-            right: -40px; /* Adjust right position to avoid side overflow */
-            bottom: 20px;
-            position: absolute;
+            width: 120px;
+            right: -40px;
+            top: 95%; /* Adjust position to avoid overflow */
             transform: translateY(-50%);
-            top: 650px;
+            position: absolute;
         }
     }
+    
     
     
     
