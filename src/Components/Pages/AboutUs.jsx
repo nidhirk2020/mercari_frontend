@@ -1,6 +1,6 @@
 import Banner from "../Banner";
 import AboutText from "../AboutUsPage/AboutText";
-// import OurValues from "../AboutUsPage/OurValues";
+import OurValues from "../AboutUsPage/OurValues";
 import Meditation from "../AboutUsPage/Meditation";
 import TeamLead from "../AboutUsPage/TeamLead";
 
@@ -9,7 +9,7 @@ const AboutUs = () => {
     <div>
      <Banner title="ABOUT US"/>
      <AboutText />
-     {/* <OurValues /> */}
+     <OurValues />
      <Meditation/>
      <TeamLead/>
 
