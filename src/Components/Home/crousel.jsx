@@ -13,10 +13,10 @@ const CarouselComponent = () => {
         showArrows={false}
         showIndicators={false}
         showStatus={false}
-        className="h-full"
+        className="h-[60vh]"
       >
         {/* Carousel Item 1 */}
-        <div className="flex items-center justify-between h-full">
+        <div className="flex items-center justify-between h-[60vh]">
           <div className="text-white px-10 w-full lg:w-1/2 text-left"> {/* Added text-left here */}
             <h2 className="text-5xl font-bold mb-12">Lorem, amet consectetur</h2>
             <p className="mt-4 text-sm">
