@@ -5,7 +5,7 @@ import girl from '../../assets/girl.jpeg';
 
 const CarouselComponent = () => {
   return (
-    <div className="relative w-full h-[767px] bg-[#164453] overflow-hidden ">
+    <div className="relative w-full h-[550px] md:h-[767px] bg-[#164453] overflow-hidden ">
       <Carousel 
         autoPlay
         interval={3000}
