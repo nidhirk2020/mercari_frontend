@@ -45,7 +45,7 @@ const OurValues = () => {
             <div className="w-2/3 text-left">
               <h3 className="text-xl font-bold text-cyan-800">AHIMSA</h3>
               {/* Replace <hr> with SVG image */}
-              <img src={topleft} alt="Top Left Line Decoration" className="w-[120px] lg:w-[400px] pt-3 h-auto mt-3 absolute top-3 left-[-10px]" />
+              <img src={topleft} alt="Top Left Line Decoration" className="w-[300px] lg:w-[400px] pt-3 h-auto mt-3 absolute top-3 left-[-10px]" />
               <p className="text-sm pt-6 text-gray-600">
                 Practicing non-violence in thoughts, words, and actions. Promoting peace and compassion as a way of life.
               </p>
