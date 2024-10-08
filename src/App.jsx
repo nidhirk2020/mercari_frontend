@@ -13,6 +13,7 @@ import Media from './Components/Pages/Media';
 
 import Login from './Components/Pages/Login';
 import CreateBlogs from './Components/Pages/CreateBlog';
+import BlogDetail from './Components/Pages/BlogDetail';
 
 // testing pull works 
 
@@ -29,6 +30,7 @@ function App() {
         
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/create" element={<CreateBlogs />} />
+          <Route path="/blogs/:id" element={<BlogDetail />} /> {/* Add this route */}
           <Route path="/media" element={<Media />} />
           <Route path="/guides" element={<Guides />} />
           <Route path="/login" element={<Login />} />
