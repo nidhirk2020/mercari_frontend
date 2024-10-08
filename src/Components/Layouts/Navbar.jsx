@@ -18,13 +18,19 @@ const Navbar = () => {
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
-  // Close dropdown when clicking outside
+  // Close dropdown and mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsDropdownOpen(false);
+      }
+
+      if (isClickOutsideMenu) {
+        setIsOpen(false); // Close mobile menu if clicked outside
+        setIsDropdownOpen(false); // Close dropdown when mobile menu closes
       }
     };
     if (isDropdownOpen) {
@@ -101,6 +107,7 @@ const Navbar = () => {
           </li>
           {/* Dropdown for Resources */}
           <li className="relative" ref={dropdownRef}>
+          <li className="relative" ref={dropdownRef}>
             <div
               className="cursor-pointer flex items-center text-gray-800 hover:text-green-600 transition-colors duration-300"
               onClick={toggleDropdown}
@@ -111,6 +118,7 @@ const Navbar = () => {
             <AnimatePresence>
               {isDropdownOpen && (
                 <motion.ul
+                  className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-40 bg-white bg-opacity-90 backdrop-blur-lg rounded shadow-lg"
                   className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-40 bg-white bg-opacity-90 backdrop-blur-lg rounded shadow-lg"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -123,7 +131,10 @@ const Navbar = () => {
                       className={({ isActive }) =>
                         isActive ? 'text-green-600' : 'block px-4 py-2 text-gray-800 hover:bg-green-200'
                       }
-                      onClick={() => setIsDropdownOpen(false)}
+                      onClick={() => {
+                        setIsDropdownOpen(false);
+                        setIsOpen(false); // Close mobile menu when clicking a link
+                      }}
                     >
                       Blogs
                     </NavLink>
@@ -134,7 +145,10 @@ const Navbar = () => {
                       className={({ isActive }) =>
                         isActive ? 'text-green-600' : 'block px-4 py-2 text-gray-800 hover:bg-green-200'
                       }
-                      onClick={() => setIsDropdownOpen(false)}
+                      onClick={() => {
+                        setIsDropdownOpen(false);
+                        setIsOpen(false); // Close mobile menu when clicking a link
+                      }}
                     >
                       Media
                     </NavLink>
@@ -145,7 +159,10 @@ const Navbar = () => {
                       className={({ isActive }) =>
                         isActive ? 'text-green-600' : 'block px-4 py-2 text-gray-800 hover:bg-green-200'
                       }
-                      onClick={() => setIsDropdownOpen(false)}
+                      onClick={() => {
+                        setIsDropdownOpen(false);
+                        setIsOpen(false); // Close mobile menu when clicking a link
+                      }}
                     >
                       Guides
                     </NavLink>
@@ -160,6 +177,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 isActive ? 'text-green-600' : 'text-gray-800 hover:text-green-600 transition-colors duration-300'
               }
+              onClick={() => setIsOpen(false)} // Close mobile menu when clicking a link
             >
               CONTACT
             </NavLink>
@@ -202,6 +220,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <motion.div
+        ref={mobileMenuRef} // Attach ref here
         className={`${
           isOpen ? 'block' : 'hidden'
         } md:hidden bg-white shadow-md fixed top-16 left-0 w-full z-50 mt-10`}
@@ -216,7 +235,10 @@ const Navbar = () => {
               className={({ isActive }) =>
                 isActive ? 'text-green-600' : 'text-gray-800 hover:text-green-600 transition-colors duration-300'
               }
-              onClick={toggleMenu}
+              onClick={() => {
+                toggleMenu();
+                setIsDropdownOpen(false); // Close dropdown when clicking a link
+              }}
             >
               HOME
             </NavLink>
@@ -227,7 +249,10 @@ const Navbar = () => {
               className={({ isActive }) =>
                 isActive ? 'text-green-600' : 'text-gray-800 hover:text-green-600 transition-colors duration-300'
               }
-              onClick={toggleMenu}
+              onClick={() => {
+                toggleMenu();
+                setIsDropdownOpen(false); // Close dropdown when clicking a link
+              }}
             >
               ABOUT US
             </NavLink>
@@ -238,7 +263,10 @@ const Navbar = () => {
               className={({ isActive }) =>
                 isActive ? 'text-green-600' : 'text-gray-800 hover:text-green-600 transition-colors duration-300'
               }
-              onClick={toggleMenu}
+              onClick={() => {
+                toggleMenu();
+                setIsDropdownOpen(false); // Close dropdown when clicking a link
+              }}
             >
               PROGRAMS
             </NavLink>
@@ -260,7 +288,10 @@ const Navbar = () => {
               className={({ isActive }) =>
                 isActive ? 'text-green-600' : 'text-gray-800 hover:text-green-600 transition-colors duration-300'
               }
-              onClick={toggleMenu}
+              onClick={() => {
+                toggleMenu();
+                setIsDropdownOpen(false); // Close dropdown when clicking a link
+              }}
             >
               CONTACT
             </NavLink>
