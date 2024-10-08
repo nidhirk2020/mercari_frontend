@@ -2,7 +2,8 @@ import React from 'react';
 import CarouselComponent from '../Home/crousel';
 import ShambhalaComponent from '../Home/ShambhalaComponent';
 import ImageTextComponent from '../Home/ImageTextComponent';
-import Slider from '../Home/slider';
+import Testimonial from '../Home/Testimonial';
+
 // import Resource from '../Home/resource';
 
 const Home = () => {
@@ -12,7 +13,7 @@ const Home = () => {
       <CarouselComponent />
       <ShambhalaComponent/>
       <ImageTextComponent/>
-      <Slider/>
+    <Testimonial/>
       {/* <Resource/> */}
     </div>
   );

@@ -4,7 +4,7 @@ import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
 
 const ImageTextComponent = () => {
   return (
-    <div className="max-w-1440px mx-auto p-4">
+    <div className="max-w-[1440px] mx-auto  py-10 px-10 xl:py-20 xl:px-20">
       <div className="flex flex-col lg:flex-row gap-8 items-start">
         
         {/* Image Grid Container for Desktop */}
