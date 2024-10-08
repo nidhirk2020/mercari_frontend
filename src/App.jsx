@@ -11,6 +11,9 @@ import Blogs from './Components/Pages/Blogs';
 import Guides from './Components/Pages/Guides';
 import Media from './Components/Pages/Media';
 
+import Login from './Components/Pages/Login';
+import CreateBlogs from './Components/Pages/CreateBlog';
+
 // testing pull works 
 
 function App() {
@@ -25,8 +28,10 @@ function App() {
           <Route path="/contact" element={<ContactUs />} />
         
           <Route path="/blogs" element={<Blogs />} />
+          <Route path="/create" element={<CreateBlogs />} />
           <Route path="/media" element={<Media />} />
           <Route path="/guides" element={<Guides />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
       <Footer />
