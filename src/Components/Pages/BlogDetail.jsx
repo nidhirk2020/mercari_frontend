@@ -21,34 +21,53 @@ const BlogDetail = () => {
   if (!blog) return <p>Loading...</p>;
 
   return (
-    <div className="p-8 max-w-3xl mx-auto space-y-8">
-      <h1 className="text-4xl font-extrabold mb-4 text-center text-gray-800">{blog.title}</h1>
-      <p className="text-sm text-gray-500 text-center mb-8">Written by {blog.author}</p>
-      
-      {/* Render each content block with subheading, paragraph, bullet points, and images */}
+    <div className="p-8 max-w-5xl mx-auto space-y-8">
+      {/* Top Section: Main Image and Details */}
+      <div className=" lg:items-start ">
+        {/* {blog.mainImage && (
+          <img
+            src={blog.mainImage}
+            alt="Main Banner"
+            className="w-full lg:w-1/2 h-[400px] rounded-lg shadow-lg object-cover"
+          />
+        )} */}
+        <div className="w-full  flex flex-col justify-center space-y-4">
+          <h1 className="text-4xl font-extrabold text-gray-800">{blog.title}</h1>
+          <div className="flex items-center space-x-4 text-gray-500">
+            <p className="text-sm"><strong>Author: </strong>{blog.author}</p>
+            <p className="text-sm"><strong>Published on: </strong>{new Date(blog.timestamp.seconds * 1000).toLocaleDateString()}</p>
+            <p className="text-sm"><strong>ERT: </strong>3 minutes</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Content Blocks with Wrapped Image */}
       {blog.contentBlocks.map((block, index) => (
         <div key={index} className="space-y-4 mb-8">
-          {block.subHeading && (
-            <h2 className="text-2xl font-semibold text-gray-800 mb-2">{block.subHeading}</h2>
-          )}
-          {block.paragraph && (
-            <p className="text-lg text-gray-700 leading-relaxed">{block.paragraph}</p>
-          )}
+          {block.subHeading && <h2 className="text-2xl font-semibold text-gray-800 mb-2">{block.subHeading}</h2>}
           
-          {block.bulletPoints && block.bulletPoints.length > 0 && (
+          <div className="text-lg text-gray-700 leading-relaxed">
+            {block.image && (
+              <img
+                src={block.image}
+                alt={`Block Image ${index + 1}`}
+                className={`max-w-[500px] h-auto rounded-lg shadow-lg ${
+                  index % 2 === 0 ? 'float-left mr-4 mb-2' : 'float-right ml-4 mb-2'
+                }`}
+              />
+            )}
+            <p>
+              {block.paragraph}
+            </p>
+            <div className="clear-both"></div> {/* Ensures wrapping text aligns neatly after image ends */}
+          </div>
+          
+          {block.bulletPoints && (
             <ul className="list-disc list-inside space-y-1 text-gray-700 ml-5">
               {block.bulletPoints.map((point, idx) => (
                 <li key={idx}>{point}</li>
               ))}
             </ul>
-          )}
-          
-          {block.image && (
-            <img
-              src={block.image}
-              alt={`Blog Image ${index + 1}`}
-              className="w-full rounded-lg shadow-lg object-cover my-4"
-            />
           )}
         </div>
       ))}

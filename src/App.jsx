@@ -7,18 +7,21 @@ import Program from './Components/Pages/Program';
 import ContactUs from './Components/Pages/ContactUs';
 import Footer from './Components/Layouts/Footer';
 
-import Blogs from './Components/Pages/Blogs';
 import Guides from './Components/Pages/Guides';
 import Media from './Components/Pages/Media';
 
 import Login from './Components/Pages/Login';
+import Blogs from './Components/Pages/Blogs';
 import CreateBlogs from './Components/Pages/CreateBlog';
 import BlogDetail from './Components/Pages/BlogDetail';
+import EditBlog from './Components/Pages/EditBlog';
 
+import  {AuthProvider}  from './AuthContext';
 // testing pull works 
 
 function App() {
   return (
+    <AuthProvider>
     <Router>
       <Navbar />
       <div className="content">
@@ -31,6 +34,7 @@ function App() {
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/create" element={<CreateBlogs />} />
           <Route path="/blogs/:id" element={<BlogDetail />} /> {/* Add this route */}
+          <Route path="/edit/:id" element={<EditBlog />} /> {/* Add this route */}
           <Route path="/media" element={<Media />} />
           <Route path="/guides" element={<Guides />} />
           <Route path="/login" element={<Login />} />
@@ -38,6 +42,7 @@ function App() {
       </div>
       <Footer />
     </Router>
+    </AuthProvider>
   );
 }
 

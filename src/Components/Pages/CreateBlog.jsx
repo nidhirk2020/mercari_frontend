@@ -8,9 +8,8 @@ const storage = getStorage();
 
 const CreateBlogs = () => {
   const [title, setTitle] = useState('');
-  const [paragraphBlocks, setParagraphBlocks] = useState([
-    { subHeading: '', paragraph: '', bulletPoints: [''], image: null },
-  ]);
+  const [mainImage, setMainImage] = useState(null);
+  const [paragraphBlocks, setParagraphBlocks] = useState([{ subHeading: '', paragraph: '', bulletPoints: [''], image: null }]);
   const [author, setAuthor] = useState('');
   const user = auth.currentUser;
 
@@ -26,24 +25,15 @@ const CreateBlogs = () => {
     }
   }, [user]);
 
-  const handleImageUpload = async (files) => {
-    const uploadedImageUrls = [];
-    for (const file of files) {
-      const imageRef = ref(storage, `blogs/${file.name}`);
-      await uploadBytes(imageRef, file);
-      const downloadURL = await getDownloadURL(imageRef);
-      uploadedImageUrls.push(downloadURL);
-    }
-    return uploadedImageUrls;
+  const handleImageUpload = async (file) => {
+    const imageRef = ref(storage, `blogs/${file.name}`);
+    await uploadBytes(imageRef, file);
+    return await getDownloadURL(imageRef);
   };
 
   const handleBlockImageUpload = async (file, blockIndex) => {
     if (file) {
-      const imageRef = ref(storage, `blogs/${file.name}`);
-      await uploadBytes(imageRef, file);
-      const downloadURL = await getDownloadURL(imageRef);
-
-      // Update the image URL in the specific block
+      const downloadURL = await handleImageUpload(file);
       const updatedBlocks = [...paragraphBlocks];
       updatedBlocks[blockIndex].image = downloadURL;
       setParagraphBlocks(updatedBlocks);
@@ -53,7 +43,7 @@ const CreateBlogs = () => {
   const createBlog = async () => {
     if (title.trim() === '' || paragraphBlocks.every(block => block.paragraph.trim() === '')) return;
 
-    // Flatten the block data for storage
+    const mainImageURL = mainImage ? await handleImageUpload(mainImage) : null;
     const blockData = paragraphBlocks.map(block => ({
       subHeading: block.subHeading,
       paragraph: block.paragraph,
@@ -63,14 +53,15 @@ const CreateBlogs = () => {
 
     await addDoc(collection(db, 'blogs'), {
       title,
+      mainImage: mainImageURL,
       contentBlocks: blockData,
       author,
       createdBy: user.uid,
       timestamp: new Date(),
     });
 
-    // Reset the form
     setTitle('');
+    setMainImage(null);
     setParagraphBlocks([{ subHeading: '', paragraph: '', bulletPoints: [''], image: null }]);
   };
 
@@ -109,6 +100,14 @@ const CreateBlogs = () => {
         placeholder="Blog Title"
         className="w-full border p-2 mb-4"
       />
+      <div className="mb-4">
+        <label className="block mb-2">Upload Main Image (Banner):</label>
+        <input
+          type="file"
+          onChange={(e) => setMainImage(e.target.files[0])}
+          className="mb-4"
+        />
+      </div>
 
       {paragraphBlocks.map((block, index) => (
         <div key={index} className="mb-6 border p-4 rounded">
@@ -124,7 +123,6 @@ const CreateBlogs = () => {
             placeholder={`Paragraph ${index + 1}`}
             className="w-full border p-2 mb-4"
           />
-          
           {block.bulletPoints.map((bullet, bulletIndex) => (
             <div key={bulletIndex} className="flex items-center mb-2">
               <input
@@ -143,16 +141,14 @@ const CreateBlogs = () => {
               )}
             </div>
           ))}
-
           <div className="mt-4">
-            <label className="block mb-2">Upload Image:</label>
+            <label className="block mb-2">Upload Image for this Block:</label>
             <input
               type="file"
               onChange={(e) => handleBlockImageUpload(e.target.files[0], index)}
               className="mb-4"
             />
           </div>
-
           {paragraphBlocks.length > 1 && (
             <button
               onClick={() => removeParagraphBlock(index)}
