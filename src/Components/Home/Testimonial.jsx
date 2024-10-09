@@ -6,16 +6,26 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import PropTypes from 'prop-types';
 
-// Arrow components that will always be visible on all screen sizes
+// Arrow components with margin-top, rounded background, and active/inactive states
 const PrevArrow = ({ onClick }) => (
-  <div onClick={onClick} className="absolute left-[-25px] top-1/2 transform -translate-y-1/2 z-10 ml-2 cursor-pointer">
-    <FaArrowLeft className="text-teal-900 w-6 h-6" />
+  <div
+    onClick={onClick}
+    className="absolute left-[-50px] top-1/2 transform -translate-y-1/2 z-10 ml-2 mt-52 cursor-pointer"
+  >
+    <div className="rounded-full bg-gray-300 p-2 hover:bg-gary-500 active:bg-gray-300 transition duration-300">
+      <FaArrowLeft className="text-teal-900 w-6 h-6" />
+    </div>
   </div>
 );
 
 const NextArrow = ({ onClick }) => (
-  <div onClick={onClick} className="absolute right-[-25px] top-1/2 transform -translate-y-1/2 z-10 mr-2 cursor-pointer">
-    <FaArrowRight className="text-teal-900 w-6 h-6" />
+  <div
+    onClick={onClick}
+    className="absolute right-[-50px] top-1/2 transform -translate-y-1/2 z-10 mr-2 mt-52 cursor-pointer"
+  >
+    <div className="rounded-full bg-gray-300 p-2 hover:bg-gray-500 active:bg-gray-300 transition duration-300">
+      <FaArrowRight className="text-teal-900 w-6 h-6" />
+    </div>
   </div>
 );
 
@@ -50,10 +60,9 @@ const Testimonial = () => {
     prevArrow: <PrevArrow />,
     nextArrow: <NextArrow />,
     responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 3}},
-      { breakpoint: 768, settings: { slidesToShow: 2}},
-      { breakpoint: 480, settings: { slidesToShow: 1}},
-      
+      { breakpoint: 1024, settings: { slidesToShow: 3 } },
+      { breakpoint: 768, settings: { slidesToShow: 2 } },
+      { breakpoint: 480, settings: { slidesToShow: 1 } },
     ],
     appendDots: dots => (
       <div style={{ marginTop: '50px' }}>
@@ -95,7 +104,7 @@ const Testimonial = () => {
     >
       <h2 className="text-2xl font-semibold mb-6 text-teal-900 text-center">Lives Changed Through Meditation</h2>
       
-      <div className="w-full max-w-5xl mx-auto relative">
+      <div className="w-full max-w-5xl mx-auto  mb-20 relative">
         <Slider {...settings}>
           {testimonials.map((testimonial, index) => (
             <div key={index} className="p-4">
