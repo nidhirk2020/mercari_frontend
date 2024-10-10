@@ -16,6 +16,9 @@ import CreateBlogs from './Components/Pages/CreateBlog';
 import BlogDetail from './Components/Pages/BlogDetail';
 import EditBlog from './Components/Pages/EditBlog';
 
+
+// import YouTubeEvents from './YouTubeEvents';
+
 import  {AuthProvider}  from './AuthContext';
 // testing pull works 
 
@@ -38,6 +41,7 @@ function App() {
           <Route path="/media" element={<Media />} />
           <Route path="/guides" element={<Guides />} />
           <Route path="/login" element={<Login />} />
+          {/* <Route path="/events" element={<YouTubeEvents />} /> */}
         </Routes>
       </div>
       <Footer />
