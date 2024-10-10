@@ -1,28 +1,95 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import programimage from '../../assets/programsimages/programimage.png'; // Import your program image
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid'; // Import Heroicons v2
+import axios from 'axios';
+import programimage from '../../assets/programsimages/programimage.png';
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid';
 
 const Programs = () => {
   const [eventType, setEventType] = useState('Select Event Type');
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [events, setEvents] = useState([]);
 
-  const events = Array(9).fill({
-    title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-    date: '22nd October, 5:00 PM Onwards',
-    location: 'Google Meet',
-    status: 'Upcoming'
-  });
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
+      const channelId = import.meta.env.VITE_YOUTUBE_CHANNEL_ID;
+      try {
+        const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
+          params: {
+            part: 'snippet',
+            channelId: channelId,
+            type: 'video',
+            key: apiKey,
+            maxResults: 10
+          },
+        });
+        setEvents(response.data.items);
+      } catch (error) {
+        console.error('Error fetching YouTube events:', error);
+      }
+    };
+
+    fetchEvents();
+  }, []);
 
   const handleDropdown = (type) => {
     setEventType(type);
     setDropdownOpen(false);
   };
 
+  const getStatusStyle = (status) => {
+    let color, backgroundColor, blinkAnimation;
+
+    switch (status) {
+      case 'live':
+        color = 'rgb(239, 68, 68)'; // Red
+        backgroundColor = 'rgb(254, 226, 226)'; // Light red background
+        blinkAnimation = 'none';
+        break;
+      case 'upcoming':
+        color = 'rgb(34, 197, 94)'; // Green
+        backgroundColor = 'rgb(209, 250, 229)'; // Light green background
+        blinkAnimation = 'none';
+        break;
+      case 'none': // Past events
+      default:
+        color = 'rgb(245, 158, 11)'; // Orange
+        backgroundColor = 'rgb(255, 237, 213)'; // Light orange background
+        blinkAnimation = 'blink 1s linear infinite'; // Blink animation for past events
+        break;
+    }
+
+    return {
+      color,
+      backgroundColor,
+      padding: '4px 8px',
+      borderRadius: '9999px',
+      fontSize: '0.75rem',
+      fontWeight: '600',
+      animation: blinkAnimation // Apply the blink animation if it's a past event
+    };
+  };
+
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
   return (
     <div className="w-full max-w-screen-xl mx-auto px-4 py-16">
+      {/* Style for blinking animation */}
+      <style>
+        {`
+          @keyframes blink {
+            0% { background-color: rgb(255, 237, 213); } /* Light orange */
+            50% { background-color: rgb(217, 119, 6); } /* Darker orange */
+            100% { background-color: rgb(255, 237, 213); } /* Light orange */
+          }
+        `}
+      </style>
+
       {/* Dropdown */}
-      <div className="relative inline-block text-left mb-6 w-full md:w-auto"> {/* Fixed the width */}
+      <div className="relative inline-block text-left mb-6 w-full md:w-auto">
         <motion.button
           whileTap={{ scale: 0.95 }}
           className="bg-white border border-gray-300 text-black py-2 px-4 rounded-md shadow-md flex justify-between items-center w-full md:w-auto"
@@ -55,37 +122,42 @@ const Programs = () => {
 
       {/* Program Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
-        {events.map((event, index) => (
-          <motion.div
-            key={index}
-            className="border border-gray-200 rounded-lg shadow-lg overflow-hidden mx-auto" // Added mx-auto to center cards in 480px frame
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: 'spring', stiffness: 100 }}
-            style={{ maxWidth: '360px' }}  // Ensures that the card width doesn't exceed 360px
-          >
-            <img src={programimage} alt="Program" className="w-full h-48 object-cover" />
-            <div className="p-4">
-              <div className="flex items-center mb-2">
-                <span className="bg-green-100 text-green-600 px-2 py-1 rounded-full text-xs font-semibold">
-                  {event.status}
-                </span>
+        {events.map((event, index) => {
+          const eventStatus = event.snippet.liveBroadcastContent || 'none';
+          const uploadDate = event.snippet.publishedAt ? formatDate(event.snippet.publishedAt) : 'Unknown Date';
+
+          return (
+            <motion.div
+              key={index}
+              className="border border-gray-200 rounded-lg shadow-lg overflow-hidden mx-auto flex flex-col h-full"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: 'spring', stiffness: 100 }}
+              style={{ maxWidth: '360px' }}
+            >
+              <img src={event.snippet.thumbnails.medium.url || programimage} alt="Program" className="w-full h-48 object-cover" />
+              <div className="flex-grow p-4 flex flex-col">
+                <div className="flex items-center mb-2">
+                  <span style={getStatusStyle(eventStatus)}>
+                    {eventStatus === 'none' ? 'Past' : eventStatus.charAt(0).toUpperCase() + eventStatus.slice(1)}
+                  </span>
+                </div>
+                <p className="text-black text-sm font-medium mb-4 line-clamp-2">{event.snippet.title}</p>
+                <div className="flex items-center text-black font-medium text-sm mb-2">
+                  <span className="mr-2">📅</span> {eventStatus === 'none' ? `Uploaded on: ${uploadDate}` : 'Event Date TBD'}
+                </div>
+                <div className="flex items-center text-black text-sm font-medium mb-4">
+                  <span className="mr-2">📍</span> Online Event
+                </div>
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
+                  className="mt-auto w-full bg-teal-600 text-white py-2 rounded-md shadow hover:bg-teal-700 transition duration-200"
+                >
+                  Watch Now
+                </motion.button>
               </div>
-              <p className="text-black text-sm mb-4 font-medium">{event.title}</p>
-              <div className="flex items-center text-black font-medium text-sm mb-2">
-                <span className="mr-2">📅</span>{event.date}
-              </div>
-              <div className="flex items-center text-black text-sm font-medium">
-                <span className="mr-2">📍</span>{event.location}
-              </div>
-              <motion.button
-                whileTap={{ scale: 0.95 }}
-                className="mt-4 w-full bg-teal-600 text-white py-2 rounded-md shadow hover:bg-teal-700 transition duration-200"
-              >
-                Register Here
-              </motion.button>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          );
+        })}
       </div>
     </div>
   );
