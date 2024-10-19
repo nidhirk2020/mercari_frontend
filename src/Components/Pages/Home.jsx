@@ -19,6 +19,14 @@ const Home = () => {
             Ted, Scambos, NSIDClead scentist, puts the potentially record
             maximum.
           </PageTitle> */}
+           <h3 className="text-xl font-bold text-center text-black mb-2">
+        TESTIMONIALS
+      </h3>
+      <h1 className="text-5xl font-bold text-center mb-8">
+  <span className="text-black">Here Are Our </span>
+  <span className="text-red-500">Heroes</span>
+</h1>
+      
           <div className="mt-24 grid grid-cols-1 gap-12 gap-x-24 md:grid-cols-2 xl:grid-cols-4">
             {teamData.map(({ img, name, position, socials }) => (
               <TeamCard

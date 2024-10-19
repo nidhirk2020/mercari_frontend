@@ -49,7 +49,7 @@ const ProductCard = ({ product }) => (
     <h2 className="text-lg font-semibold">{product.name}</h2>
     <p className="text-gray-600 mb-2">{product.description}</p>
     <span className="text-xl font-bold mb-2">{product.price}</span>
-    <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+    <button className="bg-red-600 text-black px-4 py-2 rounded hover:bg-red-500 transition">
       Buy Now
     </button>
   </div>
@@ -59,9 +59,12 @@ const Product = () => {
   return (
     <div className="max-w-full mx-auto p-6 mt-3">
       {/* Heading Section */}
-      <h1 className="text-4xl font-bold text-center text-purple-400 mb-8">
-        Feel Good, Look Great – Just as You Are
-      </h1>
+      <h1 className="text-4xl font-bold text-center mb-8">
+  <span className="text-black">Feel Good, Look Great – Just as </span>
+  <span className="text-red-500">You</span>
+  <span className="text-black"> Are</span>
+</h1>
+
 
       {/* Product Cards */}
       <div className="flex justify-center items-center flex-wrap">

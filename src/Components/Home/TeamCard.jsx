@@ -9,13 +9,13 @@ export function TeamCard({ img, name, position }) {
         alt={name}
         size="xxl"
         variant="rounded"
-        className="h-full w-full shadow-lg shadow-gray-500/25"
+        className="h-full w-full shadow-lg shadow-gray-500/25 rounded-2xl"
       />
       <Typography variant="h5" color="blue-gray" className="mt-6 mb-1">
         {name}
       </Typography>
       {position && (
-        <Typography className="font-bold text-blue-gray-500">
+        <Typography className="font-bold text-gray-500">
           {position}
         </Typography>
       )}
