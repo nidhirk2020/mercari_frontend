@@ -78,7 +78,11 @@ const Home = () => {
               </Card>
             ))}
           </div>
-          <button className='pt-2 pb-2 pl-4 pr-4 rounded-xl border border-red-500'>See all</button>
+           <button
+      className="mt-8 mx-auto px-6 py-4 rounded-xl border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition"
+    >
+      See all
+    </button>
         </div>
       </section>
     </div>
