@@ -1,6 +1,6 @@
 import React from 'react';
 import CarouselComponent from '../Home/crousel';
-import ShambhalaComponent from '../Home/ShambhalaComponent';
+import Product from '../Home/product';
 import ImageTextComponent from '../Home/ImageTextComponent';
 import Testimonial from '../Home/Testimonial';
 
@@ -11,8 +11,8 @@ const Home = () => {
     <div>
       {/* <Navbar /> */}
       <CarouselComponent />
-      <ShambhalaComponent/>
-      <ImageTextComponent/>
+      <Product/>
+      {/* <ImageTextComponent/> */}
     <Testimonial/>
       {/* <Resource/> */}
     </div>

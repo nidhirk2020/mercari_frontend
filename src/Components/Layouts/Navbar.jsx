@@ -68,11 +68,11 @@ const Navbar = () => {
   <img
     src="https://upload.wikimedia.org/wikipedia/commons/9/93/Mercari_logo.svg"
     alt="Mercari Logo"
-    className="w-24 h-24"
+    className="w-28 h-30"
   />
 </div>
 
-        <ul className="hidden md:flex space-x-6 lg:space-x-8 text-base lg:text-[16px] font-semibold">
+        <ul className="hidden md:flex space-x-6 lg:space-x-8 text-lg lg:text-[16px] font-semibold">
           {/* Navigation links */}
           <li>
             <NavLink to="/" className={({ isActive }) => isActive ? 'text-red-600' : 'text-gray-800 hover:text-red-500 transition-colors duration-300'}>
@@ -81,12 +81,12 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink to="/about" className={({ isActive }) => isActive ? 'text-red-600' : 'text-gray-800 hover:text-red-500 transition-colors duration-300'}>
-              Community
+              COMMUNITY
             </NavLink>
           </li>
           <li>
             <NavLink to="/program" className={({ isActive }) => isActive ? 'text-red-600' : 'text-gray-800 hover:text-red-500 transition-colors duration-300'}>
-              chat
+              CHAT
             </NavLink>
           </li>
 
@@ -106,11 +106,7 @@ const Navbar = () => {
           )}
         </ul>
 
-        <div className="hidden md:block">
-          <NavLink to="/donate" className={({ isActive }) => isActive ? 'bg-green-700 text-white py-2 px-3 lg:px-4 rounded' : 'bg-[#164453] text-white py-2 px-3 lg:px-4 rounded hover:bg-green-700 transition-colors duration-300'}>
-            DONATE HERE
-          </NavLink>
-        </div>
+       
 
         {/* Hamburger Menu for small screens */}
         <div className="flex items-center md:hidden">

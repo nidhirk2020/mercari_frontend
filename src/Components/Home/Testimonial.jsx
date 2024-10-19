@@ -102,7 +102,7 @@ const Testimonial = () => {
       className="mx-auto p-8 bg-gray-100"
       style={{ minHeight: '400px' }}
     >
-      <h2 className="text-2xl font-semibold mb-6 text-teal-900 text-center">Lives Changed Through Meditation</h2>
+      <h2 className="text-2xl font-semibold mb-6 text-teal-900 text-center">Testimonial</h2>
       
       <div className="w-full max-w-5xl mx-auto  mb-20 relative">
         <Slider {...settings}>

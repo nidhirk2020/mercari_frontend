@@ -1,13 +1,39 @@
-// CarouselComponent.jsx
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Banner from './Banner'; // Import the Banner component
-import bg from '../../assets/bg.png';
 
 const CarouselComponent = () => {
+  const banners = [
+    {
+      title: "You Are Beautiful",
+      description: "We are a gorgeous, infinite circle of women of all shades, all styles, in all the ways we were made. Inside of us, everything blooms.",
+      bgColor: "bg-pink-100", // Soft pink
+    },
+    {
+      title: "You Are Enough",
+      description: "Your worth is not measured by your looks. You are enough, just as you are.",
+      bgColor: "bg-blue-100", // Soft blue
+    },
+    {
+      title: "Celebrate Your Body",
+      description: "Love the skin you're in. Every inch of you is worth celebrating.",
+      bgColor: "bg-green-100", // Soft green
+    },
+    {
+      title: "Embrace Your Flaws",
+      description: "Your 'imperfections' make you unique. Own them, love them, embrace them.",
+      bgColor: "bg-purple-100", // Light lavender
+    },
+    {
+      title: "Radiate Confidence",
+      description: "Confidence is the best outfit. Rock it and own the world!",
+      bgColor: "bg-yellow-100", // Soft pastel yellow
+    },
+  ];
+
   return (
-    <div className="relative w-full h-[550px] md:h-[767px] overflow-hidden">
+    <div className="relative w-full h-[400px] md:h-[400px] overflow-hidden mb-0">
       <Carousel
         autoPlay
         interval={3000}
@@ -17,22 +43,22 @@ const CarouselComponent = () => {
         showStatus={false}
         className="h-[60vh]"
       >
-        {/* Carousel Item 1 */}
-        <Banner
-          title="Lorem, amet consectetur"
-          description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis eum ullam porro voluptate? Illum illo itaque esse mollitia exercitationem! Impedit minus odio nemo, velit maiores quasi aperiam consectetur non facere ea recusandae. Officiis facilis sunt ullam maiores eveniet nostrum sequi molestias tenetur possimus quod, sed consequuntur minus eius similique praesentium nobis exercitationem laudantium aperiam unde modi debitis. Saepe expedita non iusto ipsum quod ad, cupiditate harum sint doloremque possimus corrupti."
-          buttonText="Join Meditation"
-        />
-        
-        {/* Carousel Item 2 */}
-        <Banner
-          title="Lorem, amet consectetur"
-          description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis eum ullam porro voluptate? Illum illo itaque esse mollitia exercitationem! Impedit minus odio nemo, velit maiores quasi aperiam consectetur non facere ea recusandae. Officiis facilis sunt ullam maiores eveniet nostrum sequi molestias tenetur possimus quod, sed consequuntur minus eius similique praesentium nobis exercitationem laudantium aperiam unde modi debitis. Saepe expedita non iusto ipsum quod ad, cupiditate harum sint doloremque possimus corrupti."
-          buttonText="Join Meditation"
-        />
+        {banners.map((banner, index) => (
+          <div
+            key={index}
+            className={`flex justify-center items-center ${banner.bgColor} h-full`}
+          >
+            <Banner 
+              title={banner.title} 
+              description={banner.description} 
+            />
+          </div>
+        ))}
       </Carousel>
     </div>
   );
 };
 
 export default CarouselComponent;
+
+

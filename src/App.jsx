@@ -28,7 +28,7 @@ function App() {
           {/* <Route path="/events" element={<YouTubeEvents />} /> */}
         </Routes>
       </div>
-      <Footer />
+     
     </Router>
     </AuthProvider>
   );
