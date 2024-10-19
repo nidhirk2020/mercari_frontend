@@ -65,61 +65,36 @@ const Navbar = () => {
     <nav className="bg-white bg-opacity-20 backdrop-blur-lg shadow-md w-full sticky top-0 left-0 z-50">
       <div className="w-full max-w-screen-xl mx-auto flex justify-between items-center py-4 px-4 lg:px-6">
         <div className="flex items-center">
-          <img src={logo} alt="Shambhala Logo" className="w-20 h-20" />
-        </div>
+  <img
+    src="https://upload.wikimedia.org/wikipedia/commons/9/93/Mercari_logo.svg"
+    alt="Mercari Logo"
+    className="w-24 h-24"
+  />
+</div>
 
         <ul className="hidden md:flex space-x-6 lg:space-x-8 text-base lg:text-[16px] font-semibold">
           {/* Navigation links */}
           <li>
-            <NavLink to="/" className={({ isActive }) => isActive ? 'text-green-600' : 'text-gray-800 hover:text-green-600 transition-colors duration-300'}>
+            <NavLink to="/" className={({ isActive }) => isActive ? 'text-red-600' : 'text-gray-800 hover:text-red-500 transition-colors duration-300'}>
               HOME
             </NavLink>
           </li>
           <li>
-            <NavLink to="/about" className={({ isActive }) => isActive ? 'text-green-600' : 'text-gray-800 hover:text-green-600 transition-colors duration-300'}>
-              ABOUT US
+            <NavLink to="/about" className={({ isActive }) => isActive ? 'text-red-600' : 'text-gray-800 hover:text-red-500 transition-colors duration-300'}>
+              Community
             </NavLink>
           </li>
           <li>
-            <NavLink to="/program" className={({ isActive }) => isActive ? 'text-green-600' : 'text-gray-800 hover:text-green-600 transition-colors duration-300'}>
-              PROGRAMS
+            <NavLink to="/program" className={({ isActive }) => isActive ? 'text-red-600' : 'text-gray-800 hover:text-red-500 transition-colors duration-300'}>
+              chat
             </NavLink>
           </li>
 
           {/* Dropdown for Resources */}
-          <li className="relative" ref={dropdownRef}>
-            <div className="cursor-pointer flex items-center text-gray-800 hover:text-green-600 transition-colors duration-300" onClick={toggleDropdown}>
-              RESOURCES
-              <IoMdArrowDropdown className={`ml-1 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
-            </div>
-            <AnimatePresence>
-              {isDropdownOpen && (
-                <motion.ul className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-40 bg-white bg-opacity-90 backdrop-blur-lg rounded shadow-lg" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
-                  <li>
-                    <NavLink to="/blogs" className={({ isActive }) => isActive ? 'text-green-600' : 'block px-4 py-2 text-gray-800 hover:bg-green-200'} onClick={() => { setIsDropdownOpen(false); setIsOpen(false); }}>
-                      Blogs
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/media" className={({ isActive }) => isActive ? 'text-green-600' : 'block px-4 py-2 text-gray-800 hover:bg-green-200'} onClick={() => { setIsDropdownOpen(false); setIsOpen(false); }}>
-                      Media
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/guides" className={({ isActive }) => isActive ? 'text-green-600' : 'block px-4 py-2 text-gray-800 hover:bg-green-200'} onClick={() => { setIsDropdownOpen(false); setIsOpen(false); }}>
-                      Guides
-                    </NavLink>
-                  </li>
-                </motion.ul>
-              )}
-            </AnimatePresence>
-          </li>
+         
 
-          <li>
-            <NavLink to="/contact" className={({ isActive }) => isActive ? 'text-green-600' : 'text-gray-800 hover:text-green-600 transition-colors duration-300'} onClick={() => setIsOpen(false)}>
-              CONTACT
-            </NavLink>
-          </li>
+          
+            
 
           {/* Conditional Logout Button */}
           {user && (
