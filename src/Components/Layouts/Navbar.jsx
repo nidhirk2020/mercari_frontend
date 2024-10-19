@@ -76,23 +76,23 @@ const Navbar = () => {
           {/* Navigation links */}
           <li>
             <NavLink to="/" className={({ isActive }) => isActive ? 'text-red-600' : 'text-gray-800 hover:text-red-500 transition-colors duration-300'}>
-              HOME
+              Home
             </NavLink>
           </li>
           <li>
             <NavLink to="/about" className={({ isActive }) => isActive ? 'text-red-600' : 'text-gray-800 hover:text-red-500 transition-colors duration-300'}>
-              COMMUNITY
+              My Communities
             </NavLink>
           </li>
           <li>
             <NavLink to="/program" className={({ isActive }) => isActive ? 'text-red-600' : 'text-gray-800 hover:text-red-500 transition-colors duration-300'}>
-              CHAT
+              Style Assistant
             </NavLink>
             
           </li>
           <li>
             <NavLink to="/season" className={({ isActive }) => isActive ? 'text-red-600' : 'text-gray-800 hover:text-red-500 transition-colors duration-300'}>
-              SEASONAL ANALYSIS
+              Seasonal Analysis
             </NavLink>
           </li>
 

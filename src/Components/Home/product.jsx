@@ -62,9 +62,11 @@ const ProductCard = ({ product }) => (
 );
 
 const Product = () => (
-  <div className="max-w-full mx-auto p-6 mt-3">
-    {/* Heading Section */}
-    <h1 className="text-4xl font-bold text-center mb-8">
+  <div className="max-w-full mx-auto p-6 mt-20">
+    <h3 className="text-xl font-bold text-center text-black mb-2">
+        Just for you
+      </h3>
+      <h1 className="text-5xl font-bold text-center mb-8">
       <span className="text-black">Feel Good, Look Great – Just as </span>
       <span className="text-red-500">You</span>
       <span className="text-black"> Are</span>
