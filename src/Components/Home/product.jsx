@@ -3,7 +3,7 @@ import product1 from '../../assets/product1.jpg';
 import product2 from '../../assets/product2.jpg';
 import product3 from '../../assets/product3.webp';
 import product4 from '../../assets/product4.jpeg';
-import prod5 from '../../assets/product5.jpg';
+import prod5 from '../../assets/product5.webp';
 
 const products = [
   {
@@ -23,21 +23,21 @@ const products = [
   {
     id: 3,
     name: 'Inclusive Activewear',
-    description: 'High-quality, breathable activewear available in extended sizes for all your fitness needs.',
+    description: 'High-quality, breathable activewear available in extended sizes for all your fitness needs. Always Good.',
     imageUrl: product3,
     price: '$40.00',
   },
   {
     id: 4,
     name: 'Curvy Fit Jeans',
-    description: 'Stylish jeans tailored for curvy figures, offering comfort and style in one.',
+    description: 'Stylish jeans tailored for curvy figures, offering comfort and style in one. Flaunt your curves like a pro and feel great',
     imageUrl: product4,
     price: '$60.00',
   },
   {
     id: 5,
     name: 'Body Positive T-Shirt',
-    description: 'Soft, comfortable T-shirt with empowering messages promoting body positivity. Everyone is Beautiful.',
+    description: 'Soft, comfortable T-shirt with empowering messages promoting body positivity. Everyone is beautiful. Wear oversized and sassy shirts.',
     imageUrl: prod5,
     price: '$20.00',
   },
@@ -45,7 +45,13 @@ const products = [
 
 const ProductCard = ({ product }) => (
   <div className="flex flex-col bg-white rounded-lg shadow-md p-4 m-2 w-60">
-    <img src={product.imageUrl} alt={product.name} className="rounded-md mb-2" />
+    <div className="overflow-hidden rounded-md mb-2">
+      <img
+        src={product.imageUrl}
+        alt={product.name}
+        className="transition-transform duration-300 ease-in-out transform hover:scale-105"
+      />
+    </div>
     <h2 className="text-lg font-semibold">{product.name}</h2>
     <p className="text-gray-600 mb-2">{product.description}</p>
     <span className="text-xl font-bold mb-2">{product.price}</span>
@@ -55,26 +61,24 @@ const ProductCard = ({ product }) => (
   </div>
 );
 
-const Product = () => {
-  return (
-    <div className="max-w-full mx-auto p-6 mt-3">
-      {/* Heading Section */}
-      <h1 className="text-4xl font-bold text-center mb-8">
-  <span className="text-black">Feel Good, Look Great – Just as </span>
-  <span className="text-red-500">You</span>
-  <span className="text-black"> Are</span>
-</h1>
+const Product = () => (
+  <div className="max-w-full mx-auto p-6 mt-3">
+    {/* Heading Section */}
+    <h1 className="text-4xl font-bold text-center mb-8">
+      <span className="text-black">Feel Good, Look Great – Just as </span>
+      <span className="text-red-500">You</span>
+      <span className="text-black"> Are</span>
+    </h1>
 
-
-      {/* Product Cards */}
-      <div className="flex justify-center items-center flex-wrap">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+    {/* Product Cards */}
+    <div className="flex justify-center items-center flex-wrap">
+      {products.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
     </div>
-  );
-};
+  </div>
+);
 
 export default Product;
+
 
