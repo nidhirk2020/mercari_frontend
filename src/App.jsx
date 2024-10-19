@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Components/Layouts/Navbar';
 import Home from './Components/Pages/Home';
-
+import FloatingChatIcon from './Components/FloatingChatIcon';
 import Footer from './Components/Layouts/Footer';
 
 
@@ -27,6 +27,8 @@ function App() {
           
           {/* <Route path="/events" element={<YouTubeEvents />} /> */}
         </Routes>
+        <FloatingChatIcon />
+
       </div>
      
     </Router>
