@@ -124,60 +124,29 @@ const Navbar = () => {
       <motion.div ref={mobileMenuRef} className={`${isOpen ? 'block' : 'hidden'} bg-white shadow-md fixed top-16 left-0 w-full z-50 mt-10`} initial={{ opacity: 0, y: -50 }} animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : -50 }} transition={{ duration: 0.5 }}>
         <ul className="flex flex-col space-y-4 text-center text-lg font-semibold py-4">
           <li>
-            <NavLink to="/" className={({ isActive }) => isActive ? 'text-green-600' : 'text-gray-800 hover:text-green-600 transition-colors duration-300'} onClick={() => { toggleMenu(); setIsDropdownOpen(false); }}>
+            <NavLink to="/" className={({ isActive }) => isActive ? '' : 'text-red-600 hover:text-green-600 transition-colors duration-300'} onClick={() => { toggleMenu(); setIsDropdownOpen(false); }}>
               HOME
             </NavLink>
           </li>
           <li>
-            <NavLink to="/about" className={({ isActive }) => isActive ? 'text-green-600' : 'text-gray-800 hover:text-green-600 transition-colors duration-300'} onClick={() => { toggleMenu(); setIsDropdownOpen(false); }}>
-              ABOUT US
+            <NavLink to="/about" className={({ isActive }) => isActive ? 'text-red-600' : 'text-gray-800 hover:text-green-600 transition-colors duration-300'} onClick={() => { toggleMenu(); setIsDropdownOpen(false); }}>
+              COMMUNITY
             </NavLink>
           </li>
           <li>
-            <NavLink to="/program" className={({ isActive }) => isActive ? 'text-green-600' : 'text-gray-800 hover:text-green-600 transition-colors duration-300'} onClick={() => { toggleMenu(); setIsDropdownOpen(false); }}>
-              PROGRAMS
+            <NavLink to="/program" className={({ isActive }) => isActive ? 'text-red-600' : 'text-gray-800 hover:text-green-600 transition-colors duration-300'} onClick={() => { toggleMenu(); setIsDropdownOpen(false); }}>
+              CHATS
             </NavLink>
           </li>
 
-          {/* Dropdown for Resources in mobile view */}
-          <li>
-            <div className="cursor-pointer flex items-center justify-center text-gray-800 hover:text-green-600 transition-colors duration-300" onClick={toggleDropdown}>
-              RESOURCES
-              <IoMdArrowDropdown className={`ml-1 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
-            </div>
-            <AnimatePresence>
-              {isDropdownOpen && (
-                <motion.ul className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-40 bg-white bg-opacity-90 backdrop-blur-lg rounded shadow-lg" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
-                  <li>
-                    <NavLink to="/blogs" className={({ isActive }) => isActive ? 'text-green-600' : 'block px-4 py-2 text-gray-800 hover:bg-green-200'} onClick={() => setIsDropdownOpen(false)}>
-                      Blogs
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/media" className={({ isActive }) => isActive ? 'text-green-600' : 'block px-4 py-2 text-gray-800 hover:bg-green-200'} onClick={() => setIsDropdownOpen(false)}>
-                      Media
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/guides" className={({ isActive }) => isActive ? 'text-green-600' : 'block px-4 py-2 text-gray-800 hover:bg-green-200'} onClick={() => setIsDropdownOpen(false)}>
-                      Guides
-                    </NavLink>
-                  </li>
-                </motion.ul>
-              )}
-            </AnimatePresence>
-          </li>
+          
 
           <li>
-            <NavLink to="/contact" className={({ isActive }) => isActive ? 'text-green-600' : 'text-gray-800 hover:text-green-600 transition-colors duration-300'} onClick={() => { toggleMenu(); setIsDropdownOpen(false); }}>
-              CONTACT
+            <NavLink to="/contact" className={({ isActive }) => isActive ? 'text-red-600' : 'text-gray-800 hover:text-green-600 transition-colors duration-300'} onClick={() => { toggleMenu(); setIsDropdownOpen(false); }}>
+              SEASONAL ANALYSIS
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/donate" className={({ isActive }) => isActive ? 'bg-green-700 text-white py-2 px-3 lg:px-4 rounded' : 'bg-[#164453] text-white py-2 px-3 lg:px-4 rounded hover:bg-green-700 transition-colors duration-300'} onClick={toggleMenu}>
-              DONATE HERE
-            </NavLink>
-          </li>
+          
         </ul>
       </motion.div>
     </nav>
