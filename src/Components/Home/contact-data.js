@@ -26,7 +26,7 @@ export const contactData = [
     title: "EcoFashionistas",
     icon: c3,
     description:
-      "Join a community of women passionate about sustainable fashion, swapping style tips and eco-conscious finds.",
+      "Women passionate about sustainable fashion, swapping style tips and eco-conscious finds.",
   },
 ];
 
